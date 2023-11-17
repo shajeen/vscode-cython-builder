@@ -1,21 +1,25 @@
 {
   "name": "cythonBuilder",
   "displayName": "cythonBuilder",
-  "description": "Helps to build cython files",
+  "description": "Helps to build Cython files",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.84.0"
   },
-  "categories": [
-    "Other"
-  ],
+  "categories": ["Other"],
   "activationEvents": ["*"],
   "main": "./extension.js",
   "contributes": {
-    "commands": [{
-      "command": "extension.buildCython",
-      "title": "Build Cython"
-    }]
+    "commands": [
+      {
+        "command": "extension.buildCython",
+        "title": "Build Cython"
+      },
+      {
+        "command": "extension.listPythonEnvironments",
+        "title": "List Python Environments"
+      }
+    ]
   },
   "scripts": {
     "lint": "eslint .",
@@ -23,18 +27,20 @@
     "test": "node ./test/runTest.js"
   },
   "devDependencies": {
-    "@types/vscode": "^1.84.0",
     "@types/mocha": "^10.0.3",
     "@types/node": "18.x",
+    "@types/vscode": "^1.84.0",
+    "@vscode/test-electron": "^2.3.6",
     "eslint": "^8.52.0",
     "glob": "^10.3.10",
     "mocha": "^10.2.0",
-    "typescript": "^5.2.2",
-    "@vscode/test-electron": "^2.3.6"
+    "typescript": "^5.2.2"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/shajeen/vscode-cython-builder.git"
+  },
+  "dependencies": {
+    "python-shell": "^5.0.0"
   }
-  
 }

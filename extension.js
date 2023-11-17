@@ -1,7 +1,6 @@
 const vscode = require('vscode');
 const path = require('path');
 const fs = require('fs');
-const child_process = require('child_process');
 
 let buildButton;
 let selectFolderButton;
@@ -53,57 +52,31 @@ function activate(context) {
         terminal.sendText(`cd "${selectedFolder}" && "${pythonInterpreter}" setup.py build_ext`);
     }));
 
-
     context.subscriptions.push(vscode.commands.registerCommand('extension.selectFolder', async () => {
-        const rootFolder = vscode.workspace.workspaceFolders?.[0].uri.fsPath;
-
-        const subfolders = fs.readdirSync(rootFolder)
-            .filter(item => fs.statSync(path.join(rootFolder, item)).isDirectory());
-
-        if (subfolders.length === 0) {
-            vscode.window.showErrorMessage(`No subfolders found in ${rootFolder}.`);
-            return;
-        }
-
-        const folderItems = subfolders.map(subfolder => ({
-            label: subfolder,
-            description: path.join(rootFolder, subfolder)
-        }));
-
-        const selectedFolderItem = await vscode.window.showQuickPick(folderItems, {
-            placeHolder: 'Select a subfolder to build',
-            ignoreFocusOut: true,
+        const folderUri = await vscode.window.showOpenDialog({
+            canSelectFiles: false,
+            canSelectFolders: true,
+            canSelectMany: false,
+            openLabel: 'Select Cython Folder',
         });
 
-        if (selectedFolderItem) {
-            selectedFolder = selectedFolderItem.description;
-            updateSelectFolderButton(selectedFolderItem.label);
+        if (folderUri && folderUri.length > 0) {
+            selectedFolder = folderUri[0].fsPath;
+            updateSelectFolderButton(path.basename(selectedFolder));
         }
     }));
 
     context.subscriptions.push(vscode.commands.registerCommand('extension.selectVenv', async () => {
-        const venvFolders = vscode.workspace.workspaceFolders?.[0].uri.fsPath;
-        const venvItems = fs.readdirSync(venvFolders)
-            .filter(item => fs.statSync(path.join(venvFolders, item)).isDirectory());
-
-        if (venvItems.length === 0) {
-            vscode.window.showErrorMessage('No virtual environments found. Please create a virtual environment first.');
-            return;
-        }
-
-        const venvFolderItems = venvItems.map(venv => ({
-            label: venv,
-            description: path.join(venvFolders, venv)
-        }));
-
-        const selectedVenvItem = await vscode.window.showQuickPick(venvFolderItems, {
-            placeHolder: 'Select a virtual environment',
-            ignoreFocusOut: true,
+        const folderUri = await vscode.window.showOpenDialog({
+            canSelectFiles: false,
+            canSelectFolders: true,
+            canSelectMany: false,
+            openLabel: 'Select Virtual Environment',
         });
 
-        if (selectedVenvItem) {
-            selectedVenv = selectedVenvItem.description;
-            updateSelectVenvButton(selectedVenvItem.label);
+        if (folderUri && folderUri.length > 0) {
+            selectedVenv = folderUri[0].fsPath;
+            updateSelectVenvButton(path.basename(selectedVenv));
         }
     }));
 
