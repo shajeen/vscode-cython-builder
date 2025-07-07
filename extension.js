@@ -1,6 +1,5 @@
 const vscode = require('vscode');
 const path = require('path');
-const fs = require('fs');
 
 let buildButton;
 let selectFolderButton;
