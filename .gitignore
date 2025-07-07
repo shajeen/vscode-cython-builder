@@ -25,3 +25,10 @@ dependency/
 
 # Windows
 Thumbs.db
+
+# Python
+*.pyc
+__pycache__/
+venv/
+build/
+*.so
