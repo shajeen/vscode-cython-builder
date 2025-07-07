@@ -87,4 +87,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 
 ---
 
-**Enjoy!** If you find this extension helpful, consider [buying me a coffee](https://www.buymeacoffee.com/shajeen) or [contributing](CONTRIBUTING.md).
+**Enjoy!** If you find this extension helpful, consider [buying me a coffee](https://www.buymeacoffee.com/shajeen) or [contributing](https://github.com/shajeen/vscode-cython-builder/blob/feature/todo-fixes/docs/CONTRIBUTING.md).
