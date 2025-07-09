@@ -7,7 +7,7 @@
 
 ## Description
 
-Cython Builder is a Visual Studio Code extension that simplifies the build process for Cython files by providing a convenient button to execute `python setup.py build_ext` command.
+Cython Forge is a Visual Studio Code extension that simplifies the build process for Cython files by providing a convenient button to execute `python setup.py build_ext` command.
 
 ## Features
 
@@ -26,7 +26,7 @@ Cython Builder is a Visual Studio Code extension that simplifies the build proce
 
 1. Open Visual Studio Code.
 2. Go to the Extensions view (`Ctrl + Shift + X`).
-3. Search for "Cython Builder".
+3. Search for "Cython Forge".
 4. Click "Install" to install the extension.
 
 ## Usage
@@ -40,9 +40,9 @@ Cython Builder is a Visual Studio Code extension that simplifies the build proce
 
 The following commands are available in the Command Palette (`Ctrl + Shift + P`):
 
-- `Cython Builder: Build Cython`: Build the Cython files.
-- `Cython Builder: Select Cython Folder`: Select the folder containing the `setup.py` file.
-- `Cython Builder: Select Virtual Environment`: Select the Python virtual environment.
+- `Cython Forge: Build Cython`: Build the Cython files.
+- `Cython Forge: Select Cython Folder`: Select the folder containing the `setup.py` file.
+- `Cython Forge: Select Virtual Environment`: Select the Python virtual environment.
 
 ## Development
 
