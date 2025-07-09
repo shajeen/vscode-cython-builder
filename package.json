@@ -1,7 +1,8 @@
 {
-  "name": "cythonBuilder",
-  "displayName": "cythonBuilder",
+  "name": "cython-forge",
+  "displayName": "Cython Forge",
   "description": "Helps to build Cython files",
+  "icon": "images/cython-forge-icon.png",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.84.0"
@@ -9,8 +10,14 @@
   "categories": [
     "Other"
   ],
+  "keywords": [
+    "cython",
+    "python",
+    "build",
+    "setup.py"
+  ],
   "activationEvents": [
-    "*"
+    "onLanguage:python"
   ],
   "main": "./extension.js",
   "contributes": {
@@ -20,8 +27,12 @@
         "title": "Build Cython"
       },
       {
-        "command": "extension.listPythonEnvironments",
-        "title": "List Python Environments"
+        "command": "extension.selectFolder",
+        "title": "Select Cython Folder"
+      },
+      {
+        "command": "extension.selectVenv",
+        "title": "Select Virtual Environment"
       }
     ]
   },
