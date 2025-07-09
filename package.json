@@ -1,7 +1,7 @@
 {
   "name": "cython-forge",
   "displayName": "Cython Forge",
-  "publisher": "your-publisher-id",
+  "publisher": "SheikSShajeenAhamed",
   "description": "Helps to build Cython files",
   "icon": "images/cython-forge-icon.png",
   "version": "0.0.1",

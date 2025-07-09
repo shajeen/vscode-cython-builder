@@ -32,3 +32,5 @@ __pycache__/
 venv/
 build/
 *.so
+
+vsc-extension-quickstart.md

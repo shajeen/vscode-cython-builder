@@ -24,30 +24,35 @@ Cython Forge is a Visual Studio Code extension that simplifies the build process
 
 ## Installation
 
-To install the cython-forge-0.0.1.vsix extension, follow these steps based on your environment:
+To install the `cython-forge-0.0.1.vsix` extension, follow these steps based on your environment:
 
- For Visual Studio Code (VS Code)
-️ Using GUI (Drag & Drop or Command):
-Launch VS Code
+### For Visual Studio Code (VS Code)
 
-Go to the Extensions sidebar (Ctrl+Shift+X)
+#### From Visual Studio Marketplace:
 
-Click the 3-dot menu (⋮) on top → select "Install from VSIX..."
+1.  Open VS Code.
+2.  Go to the Extensions view (`Ctrl+Shift+X`).
+3.  Search for "Cython Forge".
+4.  Click "Install" on the "Cython Forge" extension by `SheikSShajeenAhamed`.
+5.  Alternatively, you can install directly from the Marketplace website: [https://marketplace.visualstudio.com/items?itemName=SheikSShajeenAhamed.cython-forge](https://marketplace.visualstudio.com/items?itemName=SheikSShajeenAhamed.cython-forge)
 
-Browse and select your file:
-cython-forge-0.0.1.vsix
+#### Using GUI (Drag & Drop or Command):
 
-Wait for installation to complete. Restart VS Code if prompted.
+1.  Launch VS Code
+2.  Go to the Extensions sidebar (`Ctrl+Shift+X`)
+3.  Click the 3-dot menu (⋮) on top → select "Install from VSIX..."
+4.  Browse and select your file: `cython-forge-0.0.1.vsix`
+5.  Wait for installation to complete. Restart VS Code if prompted.
 
- Using Command Line:
-Make sure you have code command available in your terminal.
+#### Using Command Line:
 
-bash
-Copy
-Edit
+Make sure you have `code` command available in your terminal.
+
+```bash
 code --install-extension cython-forge-0.0.1.vsix
-⚠️ If code is not recognized, open VS Code →
-Ctrl+Shift+P → type Shell Command: Install 'code' command in PATH → hit Enter.
+```
+
+⚠️ If `code` is not recognized, open VS Code → `Ctrl+Shift+P` → type `Shell Command: Install 'code' command in PATH` → hit Enter.
 
 Once installed, the extension will appear in your Extensions list.
 
