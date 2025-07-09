@@ -77,7 +77,7 @@ To set up the development environment:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/shajeen/vscode-cython-builder.git
+   git clone https://github.com/shajeen/cython-forge.git
    cd vscode-cython-builder
    ```
 2. Install dependencies:
