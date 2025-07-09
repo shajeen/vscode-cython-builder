@@ -24,15 +24,29 @@ suite('Extension Test Suite', () => {
 	});
 
 	test('extension.buildCython command should be registered and callable', async () => {
-		const createTerminalStub = sandbox.stub(vscode.window, 'createTerminal');
 		const showErrorMessageStub = sandbox.stub(vscode.window, 'showErrorMessage');
 
 		await vscode.commands.executeCommand('extension.buildCython');
 
 		// Expect an error message since no folder/venv is selected initially
 		assert.ok(showErrorMessageStub.calledWith('No subfolder selected. Please select a subfolder first.'));
+	});
 
-		createTerminalStub.restore();
-		showErrorMessageStub.restore();
+	test('extension.selectFolder command should be registered', async () => {
+		const showOpenDialogStub = sandbox.stub(vscode.window, 'showOpenDialog');
+		showOpenDialogStub.returns(Promise.resolve(undefined));
+
+		await vscode.commands.executeCommand('extension.selectFolder');
+
+		assert.ok(showOpenDialogStub.called);
+	});
+
+	test('extension.selectVenv command should be registered', async () => {
+		const showOpenDialogStub = sandbox.stub(vscode.window, 'showOpenDialog');
+		showOpenDialogStub.returns(Promise.resolve(undefined));
+
+		await vscode.commands.executeCommand('extension.selectVenv');
+
+		assert.ok(showOpenDialogStub.called);
 	});
 });

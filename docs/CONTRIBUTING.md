@@ -1,6 +1,6 @@
-# Contributing to Cython Builder
+# Contributing to Cython Forge
 
-We welcome contributions to the Cython Builder extension! To ensure a smooth collaboration, please follow these guidelines.
+We welcome contributions to the Cython Forge extension! To ensure a smooth collaboration, please follow these guidelines.
 
 ## How to Contribute
 
@@ -61,4 +61,4 @@ We welcome new ideas! Please open an issue on the [GitHub issue tracker](https:/
 
 ## License
 
-By contributing to Cython Builder, you agree that your contributions will be licensed under its MIT License.
+By contributing to Cython Forge, you agree that your contributions will be licensed under its MIT License.
