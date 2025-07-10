@@ -24,7 +24,7 @@ Cython Forge is a Visual Studio Code extension that simplifies the build process
 
 ## Installation
 
-To install the `cython-forge-0.0.1.vsix` extension, follow these steps based on your environment:
+To install the `cython-forge-0.0.2.vsix` extension, follow these steps based on your environment:
 
 ### For Visual Studio Code (VS Code)
 
@@ -41,7 +41,7 @@ To install the `cython-forge-0.0.1.vsix` extension, follow these steps based on 
 1.  Launch VS Code
 2.  Go to the Extensions sidebar (`Ctrl+Shift+X`)
 3.  Click the 3-dot menu (⋮) on top → select "Install from VSIX..."
-4.  Browse and select your file: `cython-forge-0.0.1.vsix`
+4.  Browse and select your file: `cython-forge-0.0.2.vsix`
 5.  Wait for installation to complete. Restart VS Code if prompted.
 
 #### Using Command Line:
@@ -49,7 +49,7 @@ To install the `cython-forge-0.0.1.vsix` extension, follow these steps based on 
 Make sure you have `code` command available in your terminal.
 
 ```bash
-code --install-extension cython-forge-0.0.1.vsix
+code --install-extension cython-forge-0.0.2.vsix
 ```
 
 ⚠️ If `code` is not recognized, open VS Code → `Ctrl+Shift+P` → type `Shell Command: Install 'code' command in PATH` → hit Enter.
