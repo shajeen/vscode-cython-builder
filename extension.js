@@ -1,6 +1,7 @@
 const vscode = require('vscode');
 const path = require('path');
 const fs = require('fs');
+const { exec } = require('child_process');
 
 let buildButton;
 let selectFolderButton;
@@ -107,26 +108,104 @@ function activate(context) {
     }));
 
     context.subscriptions.push(vscode.commands.registerCommand('extension.selectVenv', async () => {
-        const folderUri = await vscode.window.showOpenDialog({
-            canSelectFiles: false,
-            canSelectFolders: true,
-            canSelectMany: false,
-            openLabel: 'Select Virtual Environment',
+        const getCondaEnvs = () => new Promise((resolve) => {
+            exec('conda env list --json', (error, stdout) => {
+                if (error) {
+                    return resolve([]);
+                }
+                try {
+                    const condaData = JSON.parse(stdout);
+                    const envs = condaData.envs.map(env => ({
+                        label: "$(zap) " + path.basename(env),
+                        description: "Conda",
+                        path: env
+                    }));
+                    resolve(envs);
+                } catch (e) {
+                    resolve([]);
+                }
+            });
         });
 
-        if (folderUri && folderUri.length > 0) {
-            const venvPath = folderUri[0].fsPath;
-            
-            // Validate that the virtual environment contains a Python interpreter
-            const pythonInterpreter = getPythonInterpreter(venvPath);
-            if (!fs.existsSync(pythonInterpreter)) {
-                vscode.window.showErrorMessage('Selected folder does not appear to be a valid Python virtual environment.');
+        const getVenvs = () => new Promise((resolve) => {
+            const homeDir = require('os').homedir();
+            const workspaceFolders = vscode.workspace.workspaceFolders;
+            const searchPaths = [];
+            if (workspaceFolders) {
+                searchPaths.push(workspaceFolders[0].uri.fsPath);
+            }
+            searchPaths.push(path.join(homeDir, '.virtualenvs'));
+            searchPaths.push(path.join(homeDir, '.local', 'share', 'virtualenvs'));
+
+
+            const findPromises = searchPaths.map(p => new Promise(res => {
+                if (!fs.existsSync(p)) {
+                    return res([]);
+                }
+                exec(`find "${p}" -name "pyvenv.cfg" -type f -maxdepth 3`, (err, stdout) => {
+                    if (err) {
+                        return res([]);
+                    }
+                    const envs = stdout.trim().split('\n')
+                        .filter(cfg => cfg)
+                        .map(cfg => path.dirname(cfg));
+                    res(envs.map(env => ({
+                        label: "$(rocket) " + path.basename(env),
+                        description: "Venv",
+                        path: env
+                    })));
+                });
+            }));
+
+            Promise.all(findPromises).then(results => resolve(results.flat()));
+        });
+
+        vscode.window.withProgress({
+            location: vscode.ProgressLocation.Notification,
+            title: "Discovering Python environments...",
+            cancellable: false
+        }, async (progress) => {
+            const [condaEnvs, venvs] = await Promise.all([getCondaEnvs(), getVenvs()]);
+            const allEnvs = [...condaEnvs, ...venvs];
+
+            if (allEnvs.length === 0) {
+                vscode.window.showInformationMessage('No Python environments found. You can select a folder manually.');
+                // here I can fallback to the old method
+                const folderUri = await vscode.window.showOpenDialog({
+                    canSelectFiles: false,
+                    canSelectFolders: true,
+                    canSelectMany: false,
+                    openLabel: 'Select Virtual Environment Folder',
+                });
+
+                if (folderUri && folderUri.length > 0) {
+                    const venvPath = folderUri[0].fsPath;
+                    const pythonInterpreter = getPythonInterpreter(venvPath);
+                    if (!fs.existsSync(pythonInterpreter)) {
+                        vscode.window.showErrorMessage('Selected folder does not appear to be a valid Python virtual environment.');
+                        return;
+                    }
+                    selectedVenv = venvPath;
+                    updateSelectVenvButton(path.basename(selectedVenv));
+                }
                 return;
             }
-            
-            selectedVenv = venvPath;
-            updateSelectVenvButton(path.basename(selectedVenv));
-        }
+
+            const selectedEnv = await vscode.window.showQuickPick(allEnvs, {
+                placeHolder: 'Select a Python environment'
+            });
+
+            if (selectedEnv) {
+                const venvPath = selectedEnv.path;
+                const pythonInterpreter = getPythonInterpreter(venvPath);
+                if (!fs.existsSync(pythonInterpreter)) {
+                    vscode.window.showErrorMessage('Selected folder does not appear to be a valid Python virtual environment.');
+                    return;
+                }
+                selectedVenv = venvPath;
+                updateSelectVenvButton(path.basename(selectedVenv));
+            }
+        });
     }));
 
     context.subscriptions.push(buildButton);

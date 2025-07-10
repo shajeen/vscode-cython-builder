@@ -4,7 +4,7 @@
   "publisher": "SheikSShajeenAhamed",
   "description": "Helps to build Cython files",
   "icon": "images/cython-forge-icon.png",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "engines": {
     "vscode": "^1.84.0"
   },
@@ -58,6 +58,7 @@
     "url": "https://github.com/shajeen/vscode-cython-builder.git"
   },
   "dependencies": {
+    "@vscode/vsce": "^3.6.0",
     "python-shell": "^5.0.0"
   }
 }
